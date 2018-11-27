@@ -44,7 +44,7 @@ int main()
 	// 1. Set up an array of vertices for a quad (2 triangls) with an index buffer data
 	//   (What is a vertex?)
 	GLfloat vertices[] = {
-		 0.0f,  0.0f, 0.0f,		// Top left
+		 0.5f,  0.0f, 0.0f,		// Top left
 		 0.0f,  0.0f, 0.0f,		// Top right
 		 0.0f, 0.0f, 0.0f,		// Bottom right
 		0.0f, 0.0f, 0.0f		// Bottom left 
@@ -102,6 +102,16 @@ int main()
 		// on the currently active shader program.
 		shaderProgram.use();
 
+
+		glEnable(GL_POINT_SMOOTH);
+		glPointSize(15);
+		glBegin(GL_POINTS);
+		glVertex3f(0.1, 0.4, 0.0);
+		glEnd();
+		glDisable(GL_POINT_SMOOTH);
+		
+
+
 		GLfloat time = (GLfloat)glfwGetTime();
 		GLfloat blueColor = (sin(time) / 2) + 0.5f;
 		glm::vec2 pos;
@@ -111,7 +121,7 @@ int main()
 		shaderProgram.setUniform("posOffset", pos);
 
 		glBindVertexArray(vao);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_POINTS, 2, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
 		// Swap front and back buffers
